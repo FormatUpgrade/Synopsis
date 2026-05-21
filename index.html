@@ -18,13 +18,26 @@
 html{scroll-behavior:smooth;}
 body{background:var(--bg);color:var(--white);font-family:var(--font);line-height:1.7;overflow-x:hidden;}
 
+/* WATERMARK */
+body::before{
+  content:'';
+  position:fixed;
+  top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  width:80vw;height:80vw;
+  background:url('https://raw.githubusercontent.com/FormatUpgrade/Synopsis/main/Format_Upgrade%20PNG.png') center/contain no-repeat;
+  opacity:0.03;
+  z-index:0;
+  pointer-events:none;
+}
+
 /* PROGRESS BAR */
 #progress-bar{position:fixed;top:0;left:0;height:3px;width:100%;background:rgba(255,255,255,0.06);z-index:999;}
 #progress-bar::after{content:'';position:absolute;top:0;left:0;height:100%;width:var(--p,0%);background:linear-gradient(90deg,var(--gold),var(--gold2));transition:width .1s linear;border-radius:0 2px 2px 0;}
 
 /* NAV */
 nav{position:fixed;top:3px;width:100%;z-index:100;background:rgba(13,15,20,0.95);backdrop-filter:blur(14px);border-bottom:1px solid rgba(201,168,76,0.12);display:flex;align-items:center;justify-content:space-between;padding:0 2.5rem;height:68px;}
-.nav-logo img{height:80px;object-fit:contain;}
+.nav-logo img{height:52px;object-fit:contain;}
 .nav-links{display:flex;gap:1.8rem;list-style:none;}
 .nav-links a{color:var(--muted);text-decoration:none;font-size:.85rem;font-family:var(--font);font-weight:500;letter-spacing:.3px;transition:color .2s;position:relative;}
 .nav-links a::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:1.5px;background:var(--gold2);transition:width .3s;}
@@ -36,7 +49,7 @@ nav{position:fixed;top:3px;width:100%;z-index:100;background:rgba(13,15,20,0.95)
 .fab:hover{background:var(--gold2);transform:translateY(-3px);box-shadow:0 8px 28px rgba(201,168,76,0.45);}
 
 /* HERO */
-#accueil{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:8rem 2rem 5rem;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(201,168,76,0.06) 0%,transparent 70%);position:relative;overflow:hidden;}
+#accueil{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:8rem 2rem 5rem;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(201,168,76,0.06) 0%,transparent 70%);position:relative;z-index:1;overflow:hidden;}
 .hero-tag{display:inline-block;background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.3);border-radius:50px;padding:.35rem 1.1rem;font-size:.75rem;color:var(--gold2);letter-spacing:2px;text-transform:uppercase;margin-bottom:2rem;opacity:0;animation:fadeUp .8s .2s forwards;}
 .hero-title{font-family:var(--title);font-size:clamp(3.5rem,8vw,7rem);line-height:1.05;margin-bottom:1.2rem;letter-spacing:0px;text-transform:uppercase;}
 .hero-title .word{display:inline-block;opacity:0;transform:translateY(30px);margin-right:.1em;}
@@ -56,7 +69,7 @@ nav{position:fixed;top:3px;width:100%;z-index:100;background:rgba(13,15,20,0.95)
 .reveal.visible{opacity:1;transform:translate(0);}
 
 /* SECTIONS */
-section{padding:6rem 2rem;}
+section{padding:6rem 2rem;position:relative;z-index:1;}
 .section-inner{max-width:1040px;margin:0 auto;}
 .section-tag{font-size:.72rem;text-transform:uppercase;letter-spacing:3px;color:var(--gold);margin-bottom:.8rem;font-weight:600;}
 .section-title{font-family:var(--title);font-size:clamp(2.2rem,4vw,3.2rem);font-weight:400;margin-bottom:1.2rem;letter-spacing:1px;text-transform:uppercase;line-height:1.1;}
@@ -160,7 +173,7 @@ section{padding:6rem 2rem;}
 .form-status.error{background:rgba(248,113,113,0.08);border:1px solid #f87171;color:#f87171;}
 
 /* FOOTER */
-footer{background:var(--bg);border-top:1px solid rgba(201,168,76,0.08);text-align:center;padding:2rem;color:var(--muted);font-size:.82rem;font-weight:300;}
+footer{background:var(--bg);border-top:1px solid rgba(201,168,76,0.08);text-align:center;padding:2rem;color:var(--muted);font-size:.82rem;font-weight:300;position:relative;z-index:1;}
 footer span{color:var(--gold2);font-weight:500;}
 
 @keyframes fadeUp{to{opacity:1;transform:translateY(0);}}
@@ -242,7 +255,7 @@ footer span{color:var(--gold2);font-weight:500;}
                onerror="this.style.display='none'"/>
         </div>
       </div>
-      <div class="reveal from-right">
+      <div class="reveal from-right apropos-text">
         <div class="section-tag">À propos</div>
         <h2 class="section-title">Bonjour, je suis<br><em>Thomas Sohier</em></h2>
         <div class="divider"></div>
@@ -406,7 +419,7 @@ footer span{color:var(--gold2);font-weight:500;}
     <div class="divider"></div>
     <div class="contact-grid">
       <div class="reveal from-left">
-        <p class="contact-info-text" style="color:var(--muted);margin-bottom:2rem;font-size:.93rem;font-weight:300;">Une question, une demande de devis, ou simplement envie d'en savoir plus ? Je vous réponds sous 48h.</p>
+        <p style="color:var(--muted);margin-bottom:2rem;font-size:.93rem;font-weight:300;">Une question, une demande de devis, ou simplement envie d'en savoir plus ? Je vous réponds sous 48h.</p>
         <div class="info-item"><div class="info-icon">📍</div>Paris, Île-de-France · France</div>
         <div class="info-item"><div class="info-icon">📧</div>contact@formatupgrade.com</div>
         <div class="info-item"><div class="info-icon">🔗</div>linkedin.com/in/thomas-sohier</div>
@@ -470,12 +483,11 @@ window.addEventListener('load',()=>{
   });
 });
 
-// SCROLL REVEAL (rejoue à chaque passage)
+// SCROLL REVEAL
 const observer=new IntersectionObserver((entries)=>{
   entries.forEach(e=>{
     if(e.isIntersecting){
       e.target.classList.add('visible');
-      if(e.target.classList.contains('apropos-photo-wrap')) e.target.classList.add('visible');
     } else {
       e.target.classList.remove('visible');
     }
@@ -483,7 +495,7 @@ const observer=new IntersectionObserver((entries)=>{
 },{threshold:0.12});
 document.querySelectorAll('.reveal, .apropos-photo-wrap').forEach(el=>observer.observe(el));
 
-// TILT 3D léger sur cartes niveaux
+// TILT 3D léger
 document.querySelectorAll('.niveau-card').forEach(card=>{
   card.addEventListener('mousemove',e=>{
     const r=card.getBoundingClientRect();
@@ -531,25 +543,25 @@ document.getElementById('contact-form').addEventListener('submit',async function
 });
 
 // COMPTEUR ANIMÉ
-const counterObserver = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if(e.isIntersecting) {
-      e.target.querySelectorAll('.val[data-target]').forEach(el => {
-        const target = parseInt(el.dataset.target);
-        const suffix = el.dataset.suffix || '';
-        if(target === 0){ el.textContent = '0'+suffix; return; }
-        let current = 0;
-        const step = Math.ceil(target / 40);
-        const timer = setInterval(() => {
-          current = Math.min(current + step, target);
-          el.textContent = current + suffix;
-          if(current >= target) clearInterval(timer);
-        }, 30);
+const counterObserver=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.querySelectorAll('.val[data-target]').forEach(el=>{
+        const target=parseInt(el.dataset.target);
+        const suffix=el.dataset.suffix||'';
+        if(target===0){el.textContent='0'+suffix;return;}
+        let current=0;
+        const step=Math.ceil(target/40);
+        const timer=setInterval(()=>{
+          current=Math.min(current+step,target);
+          el.textContent=current+suffix;
+          if(current>=target)clearInterval(timer);
+        },30);
       });
     }
   });
-}, {threshold: 0.3});
-document.querySelectorAll('.chiffres-grid').forEach(el => counterObserver.observe(el));
+},{threshold:0.3});
+document.querySelectorAll('.chiffres-grid').forEach(el=>counterObserver.observe(el));
 </script>
 </body>
 </html>
