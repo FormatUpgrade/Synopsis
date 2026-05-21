@@ -19,7 +19,8 @@ html{scroll-behavior:smooth;}
 body{background:var(--bg);color:var(--white);font-family:var(--font);line-height:1.7;overflow-x:hidden;}
 
 /* PROGRESS BAR */
-#progress-bar{position:fixed;top:0;left:0;height:3px;width:0%;background:linear-gradient(90deg,var(--gold),var(--gold2));z-index:999;transition:width .1s linear;border-radius:0 2px 2px 0;}
+#progress-bar{position:fixed;top:0;left:0;height:3px;width:100%;background:rgba(255,255,255,0.06);z-index:999;}
+#progress-bar::after{content:'';position:absolute;top:0;left:0;height:100%;width:var(--p,0%);background:linear-gradient(90deg,var(--gold),var(--gold2));transition:width .1s linear;border-radius:0 2px 2px 0;}
 
 /* NAV */
 nav{position:fixed;top:3px;width:100%;z-index:100;background:rgba(13,15,20,0.95);backdrop-filter:blur(14px);border-bottom:1px solid rgba(201,168,76,0.12);display:flex;align-items:center;justify-content:space-between;padding:0 2.5rem;height:68px;}
@@ -38,7 +39,7 @@ nav{position:fixed;top:3px;width:100%;z-index:100;background:rgba(13,15,20,0.95)
 #accueil{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:8rem 2rem 5rem;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(201,168,76,0.06) 0%,transparent 70%);position:relative;overflow:hidden;}
 .hero-tag{display:inline-block;background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.3);border-radius:50px;padding:.35rem 1.1rem;font-size:.75rem;color:var(--gold2);letter-spacing:2px;text-transform:uppercase;margin-bottom:2rem;opacity:0;animation:fadeUp .8s .2s forwards;}
 .hero-title{font-family:var(--title);font-size:clamp(3.5rem,8vw,7rem);line-height:1.05;margin-bottom:1.2rem;letter-spacing:0px;text-transform:uppercase;}
-.hero-title .word{display:inline-block;opacity:0;transform:translateY(30px);margin-right:.25em;}
+.hero-title .word{display:inline-block;opacity:0;transform:translateY(30px);margin-right:.1em;}
 .hero-title .word.gold{color:var(--gold2);}
 .hero-sub{font-size:1rem;color:var(--muted);max-width:520px;margin-bottom:2.8rem;opacity:0;animation:fadeUp .8s 1.2s forwards;font-weight:300;}
 .hero-btns{display:flex;flex-wrap:wrap;gap:.8rem;justify-content:center;opacity:0;animation:fadeUp .8s 1.5s forwards;}
@@ -58,7 +59,7 @@ nav{position:fixed;top:3px;width:100%;z-index:100;background:rgba(13,15,20,0.95)
 section{padding:6rem 2rem;}
 .section-inner{max-width:1040px;margin:0 auto;}
 .section-tag{font-size:.72rem;text-transform:uppercase;letter-spacing:3px;color:var(--gold);margin-bottom:.8rem;font-weight:600;}
-.section-title{font-family:var(--title);font-size:clamp(2.2rem,4vw,3.2rem);font-weight:400;margin-bottom:1.2rem;letter-spacing:1.5px;text-transform:uppercase;line-height:1.1;}
+.section-title{font-family:var(--title);font-size:clamp(2.2rem,4vw,3.2rem);font-weight:400;margin-bottom:1.2rem;letter-spacing:1px;text-transform:uppercase;line-height:1.1;}
 .section-title em{font-style:normal;color:var(--gold2);}
 .divider{width:48px;height:3px;background:var(--gold);border-radius:2px;margin-bottom:2.5rem;}
 
@@ -109,7 +110,7 @@ section{padding:6rem 2rem;}
 /* FORMATIONS */
 #formation{background:var(--bg2);}
 .niveaux-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.4rem;margin-top:2.5rem;}
-.niveau-card{background:var(--bg);border:1px solid rgba(201,168,76,0.08);border-radius:var(--radius);padding:1.8rem;transition:border-color .3s,transform .3s,box-shadow .3s;position:relative;overflow:hidden;cursor:default;transform-style:preserve-3d;}
+.niveau-card{background:var(--bg);border:1px solid rgba(201,168,76,0.08);border-radius:var(--radius);padding:1.8rem;transition:border-color .3s,box-shadow .3s;position:relative;overflow:hidden;cursor:default;transform-style:preserve-3d;}
 .niveau-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:var(--radius) var(--radius) 0 0;}
 .niveau-card.n1::before{background:#6ee7b7;}
 .niveau-card.n2::before{background:#60a5fa;}
@@ -184,7 +185,7 @@ footer span{color:var(--gold2);font-weight:500;}
   <div class="nav-logo">
     <img src="https://raw.githubusercontent.com/FormatUpgrade/Synopsis/6fc8e2c51512d53c6c6cdf44bfffbe1e6c5a1ef5/Format'Upgrade%20(noir).png"
          alt="Format'Upgrade" style="height:52px;"
-         onerror="this.outerHTML='<span style=\'font-family:Bebas Neue,sans-serif;font-size:1.5rem;letter-spacing:2px;color:#e8c97a;\'>FORMAT\'<span style=\'color:#f0ece4;\'>UPGRADE</span></span>'"/>
+         onerror="this.outerHTML='<span style=\'font-family:Bebas Neue,sans-serif;font-size:1.5rem;letter-spacing:1px;color:#e8c97a;\'>FORMAT\'<span style=\'color:#f0ece4;\'>UPGRADE</span></span>'"/>
   </div>
   <ul class="nav-links">
     <li><a href="#accueil">Accueil</a></li>
@@ -222,10 +223,10 @@ footer span{color:var(--gold2);font-weight:500;}
 <!-- CHIFFRES -->
 <section id="chiffres" style="padding:3.5rem 2rem;">
   <div class="chiffres-grid reveal">
-    <div class="chiffre-item"><div class="val">5</div><div class="lbl">niveaux de maîtrise</div></div>
-    <div class="chiffre-item"><div class="val">7H</div><div class="lbl">par niveau, en présentiel</div></div>
-    <div class="chiffre-item"><div class="val">100%</div><div class="lbl">sur-mesure et immersif</div></div>
-    <div class="chiffre-item"><div class="val">0</div><div class="lbl">prérequis technique</div></div>
+    <div class="chiffre-item"><div class="val" data-target="5" data-suffix="">0</div><div class="lbl">niveaux de maîtrise</div></div>
+    <div class="chiffre-item"><div class="val" data-target="7" data-suffix="H">0H</div><div class="lbl">par niveau, en présentiel</div></div>
+    <div class="chiffre-item"><div class="val" data-target="100" data-suffix="%">0%</div><div class="lbl">sur-mesure et immersif</div></div>
+    <div class="chiffre-item"><div class="val" data-target="0" data-suffix="">0</div><div class="lbl">prérequis technique</div></div>
   </div>
 </section>
 
@@ -329,7 +330,7 @@ footer span{color:var(--gold2);font-weight:500;}
         <div class="niveau-badge">🔵 Niveau 2 · Débutant</div>
         <h3>Gagner du temps au quotidien</h3>
         <p class="tagline">Transformer l'IA en assistant personnel efficace.</p>
-        <div class="niveau-pour"><strong>Ce niveau est fait pour vous si…</strong>Vous utilisez déjà l'IA de temps en temps, mais vous prenez la première réponse sans vraiment savoir comment en tirer plus.</div>
+        <div class="niveau-pour"><strong>Ce niveau est fait pour vous si…</strong>Vous utilisez déjà l'IA de temps en temps, mais vous prenez la première réponse sans savoir comment en tirer plus.</div>
         <div class="niveau-hints"><span class="hint">⚡ Prompting</span><span class="hint">📄 PDF & images</span><span class="hint">📱 Mobile & voix</span><span class="hint">🔄 Itération</span></div>
         <a href="#contact" class="btn btn-outline" style="font-size:.8rem;padding:.5rem 1.2rem;">Me renseigner →</a>
       </div>
@@ -345,7 +346,7 @@ footer span{color:var(--gold2);font-weight:500;}
         <div class="niveau-badge">🟠 Niveau 4 · Avancé</div>
         <h3>Créer vos propres outils IA</h3>
         <p class="tagline">Industrialiser votre expertise et automatiser vos workflows.</p>
-        <div class="niveau-pour"><strong>Ce niveau est fait pour vous si…</strong>Vous maîtrisez bien l'IA et souhaitez maintenant créer des assistants sur-mesure et connecter l'IA à vos outils métier.</div>
+        <div class="niveau-pour"><strong>Ce niveau est fait pour vous si…</strong>Vous maîtrisez bien l'IA et souhaitez créer des assistants sur-mesure et connecter l'IA à vos outils métier.</div>
         <div class="niveau-hints"><span class="hint">🤖 Custom GPT</span><span class="hint">⚙️ Automatisation</span><span class="hint">🔐 Sécurité</span><span class="hint">🌐 No-Code</span></div>
         <a href="#contact" class="btn btn-outline" style="font-size:.8rem;padding:.5rem 1.2rem;">Me renseigner →</a>
       </div>
@@ -375,11 +376,11 @@ footer span{color:var(--gold2);font-weight:500;}
       </div>
       <div class="faq-item">
         <div class="faq-q" onclick="toggleFaq(this)">Proposez-vous des formations en entreprise (intra) ?<span class="arrow">+</span></div>
-        <div class="faq-a"><p>Oui, absolument ! Les formations intra-entreprise sont possibles et même recommandées pour les équipes. Je me déplace dans vos locaux et adapte le contenu à votre secteur d'activité et aux besoins spécifiques de vos collaborateurs. Contactez-moi pour un devis personnalisé.</p></div>
+        <div class="faq-a"><p>Oui, absolument ! Les formations intra-entreprise sont possibles et même recommandées pour les équipes. Je me déplace dans vos locaux et adapte le contenu à votre secteur et aux besoins de vos collaborateurs. Contactez-moi pour un devis personnalisé.</p></div>
       </div>
       <div class="faq-item">
         <div class="faq-q" onclick="toggleFaq(this)">Quelle est la durée d'une formation ?<span class="arrow">+</span></div>
-        <div class="faq-a"><p>Chaque niveau de maîtrise se déroule sur une journée complète, soit 7 heures. Ce format intensif est pensé pour être à la fois dense et digeste, avec des temps d'échange, de pratique et de mise en situation tout au long de la journée.</p></div>
+        <div class="faq-a"><p>Chaque niveau se déroule sur une journée complète, soit 7 heures. Ce format intensif est pensé pour être à la fois dense et digeste, avec des temps d'échange, de pratique et de mise en situation tout au long de la journée.</p></div>
       </div>
       <div class="faq-item">
         <div class="faq-q" onclick="toggleFaq(this)">Les formations sont-elles disponibles à distance ?<span class="arrow">+</span></div>
@@ -387,11 +388,11 @@ footer span{color:var(--gold2);font-weight:500;}
       </div>
       <div class="faq-item">
         <div class="faq-q" onclick="toggleFaq(this)">Comment se déroule une session type ?<span class="arrow">+</span></div>
-        <div class="faq-a"><p>Tout commence en amont : un questionnaire de positionnement est envoyé pour établir un diagnostic précis. Le jour J, accueil et mise en confiance, apports théoriques, exercices pratiques, gamification et participation active tout au long de la journée. La session se conclut par la remise d'un livret apprenant pour continuer à progresser en autonomie.</p></div>
+        <div class="faq-a"><p>Tout commence en amont avec un questionnaire de positionnement pour établir un diagnostic précis. Le jour J : accueil, mise en confiance, apports théoriques, exercices pratiques et gamification tout au long de la journée. La session se conclut par la remise d'un livret apprenant pour continuer à progresser en autonomie.</p></div>
       </div>
       <div class="faq-item">
         <div class="faq-q" onclick="toggleFaq(this)">Je ne sais pas quel niveau choisir, que faire ?<span class="arrow">+</span></div>
-        <div class="faq-a"><p>Pas de panique ! Avant chaque formation, un questionnaire de positionnement permet d'évaluer précisément votre niveau actuel et d'identifier vos points forts et axes de progression. Vous pouvez aussi simplement me contacter, on en parle ensemble.</p></div>
+        <div class="faq-a"><p>Pas de panique ! Un questionnaire de positionnement permet d'évaluer précisément votre niveau actuel et d'identifier vos points forts et axes de progression. Vous pouvez aussi simplement me contacter, on en parle ensemble.</p></div>
       </div>
     </div>
   </div>
@@ -405,7 +406,7 @@ footer span{color:var(--gold2);font-weight:500;}
     <div class="divider"></div>
     <div class="contact-grid">
       <div class="reveal from-left">
-        <p>Une question, une demande de devis, ou simplement envie d'en savoir plus ? Je vous réponds sous 48h.</p>
+        <p class="contact-info-text" style="color:var(--muted);margin-bottom:2rem;font-size:.93rem;font-weight:300;">Une question, une demande de devis, ou simplement envie d'en savoir plus ? Je vous réponds sous 48h.</p>
         <div class="info-item"><div class="info-icon">📍</div>Paris, Île-de-France · France</div>
         <div class="info-item"><div class="info-icon">📧</div>contact@formatupgrade.com</div>
         <div class="info-item"><div class="info-icon">🔗</div>linkedin.com/in/thomas-sohier</div>
@@ -455,13 +456,12 @@ footer span{color:var(--gold2);font-weight:500;}
 window.addEventListener('scroll',()=>{
   const h=document.documentElement;
   const pct=(h.scrollTop/(h.scrollHeight-h.clientHeight))*100;
-  document.getElementById('progress-bar').style.width=pct+'%';
+  document.getElementById('progress-bar').style.setProperty('--p',pct+'%');
 });
 
 // TEXT REVEAL HERO
 window.addEventListener('load',()=>{
-  const words=document.querySelectorAll('.hero-title .word');
-  words.forEach((w,i)=>{
+  document.querySelectorAll('.hero-title .word').forEach((w,i)=>{
     setTimeout(()=>{
       w.style.transition='opacity .4s ease, transform .4s ease';
       w.style.opacity='1';
@@ -470,29 +470,30 @@ window.addEventListener('load',()=>{
   });
 });
 
-// SCROLL REVEAL
+// SCROLL REVEAL (rejoue à chaque passage)
 const observer=new IntersectionObserver((entries)=>{
   entries.forEach(e=>{
     if(e.isIntersecting){
       e.target.classList.add('visible');
-      if(e.target.classList.contains('apropos-photo-wrap')){
-        e.target.classList.add('visible');
-      }
+      if(e.target.classList.contains('apropos-photo-wrap')) e.target.classList.add('visible');
+    } else {
+      e.target.classList.remove('visible');
     }
   });
 },{threshold:0.12});
 document.querySelectorAll('.reveal, .apropos-photo-wrap').forEach(el=>observer.observe(el));
 
-// TILT 3D sur cartes niveaux
+// TILT 3D léger sur cartes niveaux
 document.querySelectorAll('.niveau-card').forEach(card=>{
   card.addEventListener('mousemove',e=>{
     const r=card.getBoundingClientRect();
     const x=e.clientX-r.left-r.width/2;
     const y=e.clientY-r.top-r.height/2;
-    card.style.transform=`perspective(600px) rotateY(${x/20}deg) rotateX(${-y/20}deg) translateY(-4px)`;
+    card.style.transform=`perspective(600px) rotateY(${x/40}deg) rotateX(${-y/40}deg) translateY(-4px)`;
   });
   card.addEventListener('mouseleave',()=>{
     card.style.transform='perspective(600px) rotateY(0) rotateX(0) translateY(0)';
+    card.style.transition='transform .4s ease';
   });
 });
 
@@ -528,6 +529,27 @@ document.getElementById('contact-form').addEventListener('submit',async function
   btn.textContent='Envoyer le message →';
   btn.disabled=false;
 });
+
+// COMPTEUR ANIMÉ
+const counterObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if(e.isIntersecting) {
+      e.target.querySelectorAll('.val[data-target]').forEach(el => {
+        const target = parseInt(el.dataset.target);
+        const suffix = el.dataset.suffix || '';
+        if(target === 0){ el.textContent = '0'+suffix; return; }
+        let current = 0;
+        const step = Math.ceil(target / 40);
+        const timer = setInterval(() => {
+          current = Math.min(current + step, target);
+          el.textContent = current + suffix;
+          if(current >= target) clearInterval(timer);
+        }, 30);
+      });
+    }
+  });
+}, {threshold: 0.3});
+document.querySelectorAll('.chiffres-grid').forEach(el => counterObserver.observe(el));
 </script>
 </body>
 </html>
