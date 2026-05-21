@@ -4,63 +4,83 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Format'Upgrade — Thomas Sohier, Formateur IA</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
 <style>
 :root{
-  --bg:#111318;--bg2:#1a1d26;--bg3:#22263a;
+  --bg:#0d0f14;--bg2:#141720;--bg3:#1e2235;
   --gold:#c9a84c;--gold2:#e8c97a;
   --white:#f0ece4;--muted:#8a8fa8;
-  --radius:14px;--font:'Segoe UI',system-ui,sans-serif;
+  --radius:14px;
+  --font:'Poppins',sans-serif;
+  --title:'Bebas Neue',sans-serif;
 }
 *{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
-body{background:var(--bg);color:var(--white);font-family:var(--font);line-height:1.7;}
+body{background:var(--bg);color:var(--white);font-family:var(--font);line-height:1.7;overflow-x:hidden;}
+
+/* PROGRESS BAR */
+#progress-bar{position:fixed;top:0;left:0;height:3px;width:0%;background:linear-gradient(90deg,var(--gold),var(--gold2));z-index:999;transition:width .1s linear;border-radius:0 2px 2px 0;}
 
 /* NAV */
-nav{position:fixed;top:0;width:100%;z-index:100;background:rgba(17,19,24,0.92);backdrop-filter:blur(14px);border-bottom:1px solid rgba(201,168,76,0.15);display:flex;align-items:center;justify-content:space-between;padding:0 2.5rem;height:68px;}
-.nav-logo img{height:46px;object-fit:contain;}
+nav{position:fixed;top:3px;width:100%;z-index:100;background:rgba(13,15,20,0.95);backdrop-filter:blur(14px);border-bottom:1px solid rgba(201,168,76,0.12);display:flex;align-items:center;justify-content:space-between;padding:0 2.5rem;height:68px;}
+.nav-logo img{height:52px;object-fit:contain;}
 .nav-links{display:flex;gap:1.8rem;list-style:none;}
-.nav-links a{color:var(--muted);text-decoration:none;font-size:.9rem;transition:color .2s;}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:.85rem;font-family:var(--font);font-weight:500;letter-spacing:.3px;transition:color .2s;position:relative;}
+.nav-links a::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:1.5px;background:var(--gold2);transition:width .3s;}
 .nav-links a:hover{color:var(--gold2);}
+.nav-links a:hover::after{width:100%;}
 
 /* FAB */
-.fab{position:fixed;bottom:2rem;right:2rem;z-index:200;background:var(--gold);color:#111;border:none;border-radius:50px;padding:.75rem 1.5rem;font-weight:700;font-size:.9rem;cursor:pointer;box-shadow:0 4px 20px rgba(201,168,76,0.35);transition:all .25s;text-decoration:none;display:flex;align-items:center;gap:.5rem;}
-.fab:hover{background:var(--gold2);transform:translateY(-3px);box-shadow:0 8px 28px rgba(201,168,76,0.4);}
+.fab{position:fixed;bottom:2rem;right:2rem;z-index:200;background:var(--gold);color:#111;border:none;border-radius:50px;padding:.75rem 1.5rem;font-weight:700;font-size:.88rem;cursor:pointer;box-shadow:0 4px 20px rgba(201,168,76,0.35);transition:all .25s;text-decoration:none;font-family:var(--font);}
+.fab:hover{background:var(--gold2);transform:translateY(-3px);box-shadow:0 8px 28px rgba(201,168,76,0.45);}
 
 /* HERO */
-#accueil{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:8rem 2rem 5rem;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(201,168,76,0.07) 0%,transparent 70%);}
-.hero-tag{display:inline-block;background:rgba(201,168,76,0.12);border:1px solid rgba(201,168,76,0.3);border-radius:50px;padding:.35rem 1.1rem;font-size:.78rem;color:var(--gold2);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:1.8rem;}
-.hero-title{font-size:clamp(2.2rem,5vw,3.8rem);font-weight:800;line-height:1.15;margin-bottom:1.4rem;max-width:800px;}
-.hero-title em{font-style:normal;color:var(--gold2);}
-.hero-sub{font-size:1.1rem;color:var(--muted);max-width:560px;margin-bottom:2.8rem;}
-.btn{display:inline-block;padding:.8rem 2.2rem;border-radius:50px;font-weight:600;font-size:.93rem;cursor:pointer;text-decoration:none;transition:all .25s;}
-.btn-primary{background:var(--gold);color:#111;border:none;}
-.btn-primary:hover{background:var(--gold2);transform:translateY(-2px);box-shadow:0 6px 24px rgba(201,168,76,0.3);}
-.btn-outline{background:transparent;color:var(--white);border:1.5px solid rgba(240,236,228,0.25);}
+#accueil{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:8rem 2rem 5rem;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(201,168,76,0.06) 0%,transparent 70%);position:relative;overflow:hidden;}
+.hero-tag{display:inline-block;background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.3);border-radius:50px;padding:.35rem 1.1rem;font-size:.75rem;color:var(--gold2);letter-spacing:2px;text-transform:uppercase;margin-bottom:2rem;opacity:0;animation:fadeUp .8s .2s forwards;}
+.hero-title{font-family:var(--title);font-size:clamp(3.5rem,8vw,7rem);line-height:1.05;margin-bottom:1.2rem;letter-spacing:0px;text-transform:uppercase;}
+.hero-title .word{display:inline-block;opacity:0;transform:translateY(30px);margin-right:.25em;}
+.hero-title .word.gold{color:var(--gold2);}
+.hero-sub{font-size:1rem;color:var(--muted);max-width:520px;margin-bottom:2.8rem;opacity:0;animation:fadeUp .8s 1.2s forwards;font-weight:300;}
+.hero-btns{display:flex;flex-wrap:wrap;gap:.8rem;justify-content:center;opacity:0;animation:fadeUp .8s 1.5s forwards;}
+.btn{display:inline-block;padding:.8rem 2.2rem;border-radius:50px;font-weight:600;font-size:.88rem;cursor:pointer;text-decoration:none;transition:all .25s;font-family:var(--font);}
+.btn-primary{background:var(--gold);color:#111;}
+.btn-primary:hover{background:var(--gold2);transform:translateY(-2px);box-shadow:0 6px 24px rgba(201,168,76,0.35);}
+.btn-outline{background:transparent;color:var(--white);border:1.5px solid rgba(240,236,228,0.2);}
 .btn-outline:hover{border-color:var(--gold2);color:var(--gold2);}
-.hero-btns{display:flex;flex-wrap:wrap;gap:.8rem;justify-content:center;}
+
+/* SCROLL ANIMATIONS */
+.reveal{opacity:0;transform:translateY(40px);transition:opacity .7s ease,transform .7s ease;}
+.reveal.from-left{transform:translateX(-50px);}
+.reveal.from-right{transform:translateX(50px);}
+.reveal.visible{opacity:1;transform:translate(0);}
+
+/* SECTIONS */
+section{padding:6rem 2rem;}
+.section-inner{max-width:1040px;margin:0 auto;}
+.section-tag{font-size:.72rem;text-transform:uppercase;letter-spacing:3px;color:var(--gold);margin-bottom:.8rem;font-weight:600;}
+.section-title{font-family:var(--title);font-size:clamp(2.2rem,4vw,3.2rem);font-weight:400;margin-bottom:1.2rem;letter-spacing:1.5px;text-transform:uppercase;line-height:1.1;}
+.section-title em{font-style:normal;color:var(--gold2);}
+.divider{width:48px;height:3px;background:var(--gold);border-radius:2px;margin-bottom:2.5rem;}
 
 /* CHIFFRES */
 #chiffres{background:var(--bg2);padding:3.5rem 2rem;}
 .chiffres-grid{max-width:900px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:2rem;text-align:center;}
-.chiffre-item .val{font-size:2.6rem;font-weight:800;color:var(--gold2);}
-.chiffre-item .lbl{color:var(--muted);font-size:.9rem;margin-top:.2rem;}
-
-/* SECTIONS */
-section{padding:6rem 2rem;}
-.section-inner{max-width:1000px;margin:0 auto;}
-.section-tag{font-size:.78rem;text-transform:uppercase;letter-spacing:2px;color:var(--gold);margin-bottom:.8rem;}
-.section-title{font-size:clamp(1.7rem,3vw,2.4rem);font-weight:700;margin-bottom:1.2rem;}
-.section-title em{font-style:normal;color:var(--gold2);}
-.divider{width:48px;height:3px;background:var(--gold);border-radius:2px;margin-bottom:2.5rem;}
+.chiffre-item .val{font-family:var(--title);font-size:3.2rem;color:var(--gold2);letter-spacing:2px;}
+.chiffre-item .lbl{color:var(--muted);font-size:.85rem;margin-top:.2rem;}
 
 /* À PROPOS */
 #apropos{background:var(--bg);}
-.apropos-grid{display:grid;grid-template-columns:1fr 1.6fr;gap:3.5rem;align-items:center;}
-.apropos-photo{width:100%;max-width:280px;border-radius:20px;border:2px solid rgba(201,168,76,0.2);display:block;margin:0 auto;object-fit:cover;}
-.apropos-text p{color:var(--muted);margin-bottom:1rem;font-size:.97rem;}
-.apropos-text p strong{color:var(--white);}
+.apropos-grid{display:grid;grid-template-columns:1fr 1.6fr;gap:4rem;align-items:center;}
+.apropos-photo-wrap{position:relative;display:flex;justify-content:center;align-items:flex-end;}
+.apropos-glow{position:absolute;bottom:-10%;left:50%;transform:translateX(-50%);width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(201,168,76,0.35) 0%,rgba(201,168,76,0.1) 50%,transparent 70%);filter:blur(30px);opacity:0;transition:opacity 1s ease;animation:pulse-glow 3s ease-in-out infinite;}
+.apropos-photo-wrap.visible .apropos-glow{opacity:1;}
+@keyframes pulse-glow{0%,100%{transform:translateX(-50%) scale(1);opacity:.8;}50%{transform:translateX(-50%) scale(1.15);opacity:1;}}
+.apropos-photo{width:100%;max-width:300px;object-fit:contain;position:relative;z-index:1;animation:float 4s ease-in-out infinite;filter:drop-shadow(0 20px 40px rgba(201,168,76,0.15));}
+@keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
+.apropos-text p{color:var(--muted);margin-bottom:1rem;font-size:.95rem;font-weight:300;}
+.apropos-text p strong{color:var(--white);font-weight:600;}
 .chips{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1.5rem;}
-.chip{background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.25);border-radius:50px;padding:.3rem .9rem;font-size:.82rem;color:var(--gold2);}
+.chip{background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.2);border-radius:50px;padding:.3rem .9rem;font-size:.78rem;color:var(--gold2);font-weight:500;}
 
 /* CONFIANCE */
 #confiance{background:var(--bg2);padding:4.5rem 2rem;}
@@ -68,98 +88,103 @@ section{padding:6rem 2rem;}
 .confiance-inner .divider{margin:1.2rem auto 2.5rem;}
 .afolor-card{background:var(--bg3);border:1px solid rgba(201,168,76,0.15);border-radius:var(--radius);padding:2rem 2.5rem;text-align:left;max-width:700px;margin:0 auto;}
 .afolor-header{display:flex;align-items:center;gap:1.2rem;margin-bottom:1.3rem;}
-.afolor-logo{height:38px;object-fit:contain;}
-.afolor-name{font-weight:700;color:var(--white);}
-.afolor-date{font-size:.82rem;color:var(--muted);}
-.afolor-quote{color:var(--muted);font-size:.96rem;line-height:1.75;font-style:italic;}
-.afolor-quote strong{color:var(--gold2);font-style:normal;}
+.afolor-logo{height:36px;object-fit:contain;}
+.afolor-name{font-weight:700;color:var(--white);font-size:.95rem;}
+.afolor-date{font-size:.78rem;color:var(--muted);}
+.afolor-quote{color:var(--muted);font-size:.93rem;line-height:1.8;font-style:italic;font-weight:300;}
+.afolor-quote strong{color:var(--gold2);font-style:normal;font-weight:600;}
 
 /* TÉMOIGNAGES */
 #temoignages{background:var(--bg);}
 .temo-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;margin-top:2rem;}
-.temo-card{background:var(--bg2);border:1px solid rgba(201,168,76,0.1);border-radius:var(--radius);padding:1.8rem;transition:border-color .25s,transform .25s;}
-.temo-card:hover{border-color:rgba(201,168,76,0.35);transform:translateY(-4px);}
+.temo-card{background:var(--bg2);border:1px solid rgba(201,168,76,0.08);border-radius:var(--radius);padding:1.8rem;transition:border-color .3s,transform .3s,box-shadow .3s;}
+.temo-card:hover{border-color:rgba(201,168,76,0.3);transform:translateY(-4px);box-shadow:0 12px 32px rgba(0,0,0,0.3);}
 .temo-header{display:flex;align-items:center;gap:.9rem;margin-bottom:1.1rem;}
-.temo-avatar{width:46px;height:46px;border-radius:50%;background:var(--bg3);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1.1rem;color:var(--gold2);flex-shrink:0;border:1.5px solid rgba(201,168,76,0.2);}
-.temo-name{font-weight:600;font-size:.95rem;}
-.temo-role{font-size:.78rem;color:var(--muted);}
-.temo-text{color:var(--muted);font-size:.92rem;line-height:1.65;font-style:italic;}
-.temo-stars{color:var(--gold);font-size:.85rem;margin-top:.8rem;}
+.temo-avatar{width:46px;height:46px;border-radius:50%;background:var(--bg3);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1rem;color:var(--gold2);flex-shrink:0;border:1.5px solid rgba(201,168,76,0.2);}
+.temo-name{font-weight:600;font-size:.92rem;}
+.temo-role{font-size:.75rem;color:var(--muted);}
+.temo-text{color:var(--muted);font-size:.9rem;line-height:1.7;font-style:italic;font-weight:300;}
+.temo-stars{color:var(--gold);font-size:.82rem;margin-top:.8rem;}
 
 /* FORMATIONS */
 #formation{background:var(--bg2);}
 .niveaux-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.4rem;margin-top:2.5rem;}
-.niveau-card{background:var(--bg);border:1px solid rgba(201,168,76,0.08);border-radius:var(--radius);padding:1.8rem;transition:border-color .3s,transform .3s;position:relative;overflow:hidden;}
+.niveau-card{background:var(--bg);border:1px solid rgba(201,168,76,0.08);border-radius:var(--radius);padding:1.8rem;transition:border-color .3s,transform .3s,box-shadow .3s;position:relative;overflow:hidden;cursor:default;transform-style:preserve-3d;}
 .niveau-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:var(--radius) var(--radius) 0 0;}
 .niveau-card.n1::before{background:#6ee7b7;}
 .niveau-card.n2::before{background:#60a5fa;}
 .niveau-card.n3::before{background:#fbbf24;}
 .niveau-card.n4::before{background:#f97316;}
 .niveau-card.n5::before{background:#c084fc;}
-.niveau-card:hover{border-color:rgba(201,168,76,0.3);transform:translateY(-4px);}
-.niveau-badge{display:inline-flex;align-items:center;gap:.5rem;font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;padding:.25rem .8rem;border-radius:50px;margin-bottom:1rem;}
-.n1 .niveau-badge{background:rgba(110,231,183,0.12);color:#6ee7b7;}
-.n2 .niveau-badge{background:rgba(96,165,250,0.12);color:#60a5fa;}
-.n3 .niveau-badge{background:rgba(251,191,36,0.12);color:#fbbf24;}
-.n4 .niveau-badge{background:rgba(249,115,22,0.12);color:#f97316;}
-.n5 .niveau-badge{background:rgba(192,132,252,0.12);color:#c084fc;}
-.niveau-card h3{font-size:1.1rem;font-weight:700;margin-bottom:.5rem;}
-.niveau-card .tagline{color:var(--gold2);font-size:.88rem;font-style:italic;margin-bottom:1rem;}
-.niveau-pour{background:var(--bg2);border-radius:10px;padding:.8rem 1rem;font-size:.85rem;color:var(--muted);margin-bottom:1.2rem;border-left:2px solid rgba(201,168,76,0.3);}
-.niveau-pour strong{color:var(--white);display:block;margin-bottom:.2rem;font-size:.8rem;text-transform:uppercase;letter-spacing:.5px;}
+.niveau-card:hover{box-shadow:0 16px 40px rgba(0,0,0,0.35);}
+.niveau-badge{display:inline-flex;align-items:center;gap:.4rem;font-size:.72rem;font-weight:600;text-transform:uppercase;letter-spacing:1.5px;padding:.25rem .8rem;border-radius:50px;margin-bottom:1rem;}
+.n1 .niveau-badge{background:rgba(110,231,183,0.1);color:#6ee7b7;}
+.n2 .niveau-badge{background:rgba(96,165,250,0.1);color:#60a5fa;}
+.n3 .niveau-badge{background:rgba(251,191,36,0.1);color:#fbbf24;}
+.n4 .niveau-badge{background:rgba(249,115,22,0.1);color:#f97316;}
+.n5 .niveau-badge{background:rgba(192,132,252,0.1);color:#c084fc;}
+.niveau-card h3{font-family:var(--title);font-size:1.5rem;font-weight:400;letter-spacing:1px;text-transform:uppercase;margin-bottom:.4rem;}
+.niveau-card .tagline{color:var(--gold2);font-size:.83rem;font-style:italic;margin-bottom:1rem;font-weight:300;}
+.niveau-pour{background:var(--bg2);border-radius:10px;padding:.8rem 1rem;font-size:.82rem;color:var(--muted);margin-bottom:1.2rem;border-left:2px solid rgba(201,168,76,0.3);font-weight:300;}
+.niveau-pour strong{color:var(--white);display:block;margin-bottom:.3rem;font-size:.72rem;text-transform:uppercase;letter-spacing:.8px;font-weight:600;}
 .niveau-hints{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.2rem;}
-.hint{background:var(--bg3);border-radius:6px;padding:.2rem .6rem;font-size:.78rem;color:var(--muted);}
-.niveau-lock{display:flex;align-items:center;gap:.4rem;font-size:.8rem;color:var(--muted);}
+.hint{background:var(--bg3);border-radius:6px;padding:.2rem .6rem;font-size:.75rem;color:var(--muted);}
 
 /* FAQ */
 #faq{background:var(--bg);}
 .faq-list{margin-top:1.5rem;display:flex;flex-direction:column;gap:.9rem;}
-.faq-item{background:var(--bg2);border:1px solid rgba(201,168,76,0.1);border-radius:var(--radius);overflow:hidden;}
-.faq-q{display:flex;justify-content:space-between;align-items:center;padding:1.2rem 1.5rem;cursor:pointer;font-weight:600;font-size:.95rem;gap:1rem;transition:color .2s;}
+.faq-item{background:var(--bg2);border:1px solid rgba(201,168,76,0.08);border-radius:var(--radius);overflow:hidden;}
+.faq-q{display:flex;justify-content:space-between;align-items:center;padding:1.2rem 1.5rem;cursor:pointer;font-weight:500;font-size:.92rem;gap:1rem;transition:color .2s;}
 .faq-q:hover{color:var(--gold2);}
 .faq-q .arrow{color:var(--gold);font-size:1.2rem;transition:transform .3s;flex-shrink:0;line-height:1;}
 .faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease;}
 .faq-a.open{max-height:400px;}
-.faq-a p{padding:0 1.5rem 1.3rem;color:var(--muted);font-size:.92rem;line-height:1.75;}
+.faq-a p{padding:0 1.5rem 1.3rem;color:var(--muted);font-size:.88rem;line-height:1.8;font-weight:300;}
 .faq-item.active .arrow{transform:rotate(45deg);}
 
 /* CONTACT */
 #contact{background:var(--bg2);}
 .contact-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:3rem;}
-.contact-info p{color:var(--muted);margin-bottom:2rem;font-size:.96rem;}
-.info-item{display:flex;align-items:center;gap:.9rem;margin-bottom:1.2rem;color:var(--muted);font-size:.92rem;}
-.info-icon{width:40px;height:40px;border-radius:10px;background:rgba(201,168,76,0.1);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;}
-.form-group{margin-bottom:1.15rem;}
-.form-group label{display:block;font-size:.84rem;color:var(--muted);margin-bottom:.4rem;}
-.form-group input,.form-group textarea,.form-group select{width:100%;background:var(--bg3);border:1px solid rgba(240,236,228,0.1);border-radius:10px;padding:.75rem 1rem;color:var(--white);font-family:var(--font);font-size:.93rem;outline:none;transition:border-color .2s;}
+.contact-info p{color:var(--muted);margin-bottom:2rem;font-size:.93rem;font-weight:300;}
+.info-item{display:flex;align-items:center;gap:.9rem;margin-bottom:1.2rem;color:var(--muted);font-size:.88rem;}
+.info-icon{width:40px;height:40px;border-radius:10px;background:rgba(201,168,76,0.08);display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;}
+.form-group{margin-bottom:1.1rem;}
+.form-group label{display:block;font-size:.8rem;color:var(--muted);margin-bottom:.4rem;font-weight:500;letter-spacing:.3px;}
+.form-group input,.form-group textarea,.form-group select{width:100%;background:var(--bg3);border:1px solid rgba(240,236,228,0.08);border-radius:10px;padding:.75rem 1rem;color:var(--white);font-family:var(--font);font-size:.88rem;outline:none;transition:border-color .2s;font-weight:300;}
 .form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:var(--gold);}
 .form-group textarea{height:120px;resize:vertical;}
 .form-group select option{background:var(--bg3);}
-.form-status{display:none;border-radius:10px;padding:1rem 1.2rem;font-size:.92rem;margin-top:1rem;}
-.form-status.success{background:rgba(110,231,183,0.1);border:1px solid #6ee7b7;color:#6ee7b7;}
-.form-status.error{background:rgba(248,113,113,0.1);border:1px solid #f87171;color:#f87171;}
+.form-status{display:none;border-radius:10px;padding:1rem 1.2rem;font-size:.88rem;margin-top:1rem;}
+.form-status.success{background:rgba(110,231,183,0.08);border:1px solid #6ee7b7;color:#6ee7b7;}
+.form-status.error{background:rgba(248,113,113,0.08);border:1px solid #f87171;color:#f87171;}
 
 /* FOOTER */
-footer{background:var(--bg);border-top:1px solid rgba(201,168,76,0.1);text-align:center;padding:2rem;color:var(--muted);font-size:.85rem;}
-footer span{color:var(--gold2);}
+footer{background:var(--bg);border-top:1px solid rgba(201,168,76,0.08);text-align:center;padding:2rem;color:var(--muted);font-size:.82rem;font-weight:300;}
+footer span{color:var(--gold2);font-weight:500;}
+
+@keyframes fadeUp{to{opacity:1;transform:translateY(0);}}
 
 @media(max-width:768px){
   nav{padding:0 1.2rem;}
-  .nav-links{gap:1rem;font-size:.82rem;}
+  .nav-links{gap:.8rem;font-size:.78rem;}
   .apropos-grid,.contact-grid{grid-template-columns:1fr;}
-  .fab{bottom:1.2rem;right:1.2rem;padding:.65rem 1.1rem;font-size:.84rem;}
+  .fab{bottom:1.2rem;right:1.2rem;padding:.65rem 1.1rem;font-size:.82rem;}
   .niveaux-grid{grid-template-columns:1fr;}
+  .hero-title{font-size:3rem;}
 }
 </style>
 </head>
 <body>
 
+<div id="progress-bar"></div>
 <a href="#contact" class="fab">✉ Me contacter</a>
 
 <!-- NAV -->
 <nav>
   <div class="nav-logo">
-    <img src="https://raw.githubusercontent.com/FormatUpgrade/Synopsis/main/Format_Upgrade%20PNG.png" alt="Format'Upgrade" onerror="this.style.display='none'"/>
+    <img src="https://raw.githubusercontent.com/FormatUpgrade/Synopsis/6fc8e2c51512d53c6c6cdf44bfffbe1e6c5a1ef5/Format'Upgrade%20(noir).png"
+         alt="Format'Upgrade" style="height:52px;"
+         onerror="this.outerHTML='<span style=\'font-family:Bebas Neue,sans-serif;font-size:1.5rem;letter-spacing:2px;color:#e8c97a;\'>FORMAT\'<span style=\'color:#f0ece4;\'>UPGRADE</span></span>'"/>
   </div>
   <ul class="nav-links">
     <li><a href="#accueil">Accueil</a></li>
@@ -173,9 +198,21 @@ footer span{color:var(--gold2);}
 
 <!-- HERO -->
 <section id="accueil">
-  <div class="hero-tag">✦ Formateur Professionnel d'Adultes · Spécialiste IA</div>
-  <h1 class="hero-title">L'IA n'est pas réservée<br>aux experts. Elle est <em>pour vous.</em></h1>
-  <p class="hero-sub">Des formations concrètes, vivantes et accessibles à tous — pour comprendre, adopter et maîtriser l'intelligence artificielle dans votre vie professionnelle.</p>
+  <div class="hero-tag">Formateur Professionnel d'Adultes · Spécialiste IA</div>
+  <h1 class="hero-title" id="hero-title">
+    <span class="word">L'IA</span>
+    <span class="word">N'EST</span>
+    <span class="word">PAS</span>
+    <span class="word">RÉSERVÉE</span>
+    <span class="word">AUX</span>
+    <span class="word">EXPERTS.</span>
+    <br>
+    <span class="word">ELLE</span>
+    <span class="word">EST</span>
+    <span class="word gold">POUR</span>
+    <span class="word gold">VOUS.</span>
+  </h1>
+  <p class="hero-sub">Des formations concrètes, vivantes et accessibles à tous. Pour comprendre, adopter et maîtriser l'intelligence artificielle dans votre vie professionnelle.</p>
   <div class="hero-btns">
     <a href="#formation" class="btn btn-primary">Découvrir les formations</a>
     <a href="#contact" class="btn btn-outline">Me contacter</a>
@@ -184,10 +221,10 @@ footer span{color:var(--gold2);}
 
 <!-- CHIFFRES -->
 <section id="chiffres" style="padding:3.5rem 2rem;">
-  <div class="chiffres-grid">
+  <div class="chiffres-grid reveal">
     <div class="chiffre-item"><div class="val">5</div><div class="lbl">niveaux de maîtrise</div></div>
-    <div class="chiffre-item"><div class="val">7h</div><div class="lbl">par niveau, en présentiel</div></div>
-    <div class="chiffre-item"><div class="val">100%</div><div class="lbl">sur-mesure & immersif</div></div>
+    <div class="chiffre-item"><div class="val">7H</div><div class="lbl">par niveau, en présentiel</div></div>
+    <div class="chiffre-item"><div class="val">100%</div><div class="lbl">sur-mesure et immersif</div></div>
     <div class="chiffre-item"><div class="val">0</div><div class="lbl">prérequis technique</div></div>
   </div>
 </section>
@@ -196,12 +233,15 @@ footer span{color:var(--gold2);}
 <section id="apropos">
   <div class="section-inner">
     <div class="apropos-grid">
-      <div>
-        <img src="https://raw.githubusercontent.com/FormatUpgrade/Synopsis/main/FORMATEUR.jpg"
-             class="apropos-photo" alt="Thomas Sohier — Format'Upgrade"
-             onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22280%22 height=%22340%22 viewBox=%220 0 280 340%22%3E%3Crect width=%22280%22 height=%22340%22 rx=%2220%22 fill=%22%2322263a%22/%3E%3Ctext x=%22140%22 y=%22180%22 font-size=%2280%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22%3E🧑%E2%80%8D💼%3C/text%3E%3C/svg%3E'"/>
+      <div class="reveal from-left">
+        <div class="apropos-photo-wrap">
+          <div class="apropos-glow"></div>
+          <img src="https://raw.githubusercontent.com/FormatUpgrade/Synopsis/6fc8e2c51512d53c6c6cdf44bfffbe1e6c5a1ef5/FORMATEUR2.png"
+               class="apropos-photo" alt="Thomas Sohier"
+               onerror="this.style.display='none'"/>
+        </div>
       </div>
-      <div class="apropos-text">
+      <div class="reveal from-right">
         <div class="section-tag">À propos</div>
         <h2 class="section-title">Bonjour, je suis<br><em>Thomas Sohier</em></h2>
         <div class="divider"></div>
@@ -221,20 +261,20 @@ footer span{color:var(--gold2);}
   </div>
 </section>
 
-<!-- ILS M'ONT FAIT CONFIANCE -->
+<!-- CONFIANCE -->
 <section id="confiance" style="background:var(--bg2);padding:4.5rem 2rem;">
   <div class="confiance-inner">
-    <div class="section-tag">Ils m'ont fait confiance</div>
-    <h2 class="section-title">Un retour terrain <em>qui parle</em></h2>
-    <div class="divider"></div>
-    <div class="afolor-card">
+    <div class="section-tag reveal">Ils m'ont fait confiance</div>
+    <h2 class="section-title reveal">Un retour terrain <em>qui parle</em></h2>
+    <div class="divider" style="margin:1.2rem auto 2.5rem;"></div>
+    <div class="afolor-card reveal">
       <div class="afolor-header">
         <img src="https://raw.githubusercontent.com/FormatUpgrade/Synopsis/main/Logo%20AFOLOR.png"
              class="afolor-logo" alt="AFOLOR"
-             onerror="this.outerHTML='<span style=\'font-weight:800;color:#e8c97a;font-size:1.1rem\'>AFOLOR</span>'"/>
+             onerror="this.outerHTML='<span style=\'font-weight:700;color:#e8c97a;\'>AFOLOR</span>'"/>
         <div>
           <div class="afolor-name">AFOLOR</div>
-          <div class="afolor-date">Formation IA — Niveau confirmé · Avril 2025</div>
+          <div class="afolor-date">Formation IA · Niveau confirmé · Avril 2025</div>
         </div>
       </div>
       <p class="afolor-quote">"Un petit retour sur l'intervention de <strong>Thomas Sohier</strong> qui a formé l'équipe d'AFOLOR à l'IA, niveau confirmé, les 23 et 24 Avril. L'occasion d'approfondir les outils, de les tester, de comprendre les développements possibles et de les sécuriser. <strong>Un grand merci à Thomas pour cette première qui s'est révélée d'un excellent niveau ! Un formateur au TOP !</strong>"</p>
@@ -245,28 +285,22 @@ footer span{color:var(--gold2);}
 <!-- TÉMOIGNAGES -->
 <section id="temoignages">
   <div class="section-inner">
-    <div class="section-tag">Témoignages</div>
-    <h2 class="section-title">Ce qu'ils disent de <em>Thomas</em></h2>
+    <div class="section-tag reveal">Témoignages</div>
+    <h2 class="section-title reveal">Ce qu'ils disent de <em>Thomas</em></h2>
     <div class="divider"></div>
     <div class="temo-grid">
-      <div class="temo-card">
+      <div class="temo-card reveal from-left">
         <div class="temo-header">
           <div class="temo-avatar">D</div>
-          <div>
-            <div class="temo-name">Daniel Maréchal</div>
-            <div class="temo-role">Formateur expert – Accompagnement individualisé</div>
-          </div>
+          <div><div class="temo-name">Daniel Maréchal</div><div class="temo-role">Formateur expert · Accompagnement individualisé</div></div>
         </div>
         <p class="temo-text">"Je confirme, Thomas est clairement fait pour ce métier. Passionné, investi et très à l'aise dans la transmission, il a toutes les qualités d'un excellent formateur."</p>
         <div class="temo-stars">★★★★★</div>
       </div>
-      <div class="temo-card">
+      <div class="temo-card reveal from-right">
         <div class="temo-header">
           <div class="temo-avatar">O</div>
-          <div>
-            <div class="temo-name">Olivier Charalambides</div>
-            <div class="temo-role">Formateur Soft Skills & Communication · Coach</div>
-          </div>
+          <div><div class="temo-name">Olivier Charalambides</div><div class="temo-role">Formateur Soft Skills & Communication · Coach</div></div>
         </div>
         <p class="temo-text">"Un grand bravo Thomas Sohier ! Une personne et un formateur extrêmement talentueux que je recommande vivement à tous les centres de formation et entreprises !"</p>
         <div class="temo-stars">★★★★★</div>
@@ -278,74 +312,66 @@ footer span{color:var(--gold2);}
 <!-- FORMATIONS -->
 <section id="formation">
   <div class="section-inner">
-    <div class="section-tag">Parcours de formation</div>
-    <h2 class="section-title">5 niveaux pour <em>progresser à votre rythme</em></h2>
+    <div class="section-tag reveal">Parcours de formation</div>
+    <h2 class="section-title reveal">5 niveaux pour <em>progresser à votre rythme</em></h2>
     <div class="divider"></div>
-    <p style="color:var(--muted);max-width:680px;margin-bottom:.5rem;">Chaque niveau est une journée complète de 7h, en présentiel, pensée pour être immersive et directement applicable. Vous entrez au niveau qui vous correspond — et vous progressez à votre rythme.</p>
-
+    <p class="reveal" style="color:var(--muted);max-width:680px;margin-bottom:.5rem;font-size:.93rem;font-weight:300;">Chaque niveau est une journée complète de 7h, en présentiel, pensée pour être immersive et directement applicable. Vous entrez au niveau qui vous correspond.</p>
     <div class="niveaux-grid">
-
-      <div class="niveau-card n1">
+      <div class="niveau-card n1 reveal">
         <div class="niveau-badge">🟢 Niveau 1 · Novice</div>
         <h3>Démystifier l'IA</h3>
-        <p class="tagline">Poser les bonnes bases avant de tout le reste.</p>
+        <p class="tagline">Poser les bonnes bases avant tout le reste.</p>
         <div class="niveau-pour"><strong>Ce niveau est fait pour vous si…</strong>Vous avez entendu parler de l'IA partout mais vous ne savez pas vraiment ce que c'est, ni comment l'utiliser sans risque.</div>
         <div class="niveau-hints"><span class="hint">🧠 Comprendre</span><span class="hint">🔍 Distinguer</span><span class="hint">🔒 Sécuriser</span><span class="hint">✍️ Premier prompt</span></div>
-        <a href="#contact" class="btn btn-outline" style="font-size:.83rem;padding:.5rem 1.2rem;">Me renseigner →</a>
+        <a href="#contact" class="btn btn-outline" style="font-size:.8rem;padding:.5rem 1.2rem;">Me renseigner →</a>
       </div>
-
-      <div class="niveau-card n2">
+      <div class="niveau-card n2 reveal">
         <div class="niveau-badge">🔵 Niveau 2 · Débutant</div>
         <h3>Gagner du temps au quotidien</h3>
         <p class="tagline">Transformer l'IA en assistant personnel efficace.</p>
         <div class="niveau-pour"><strong>Ce niveau est fait pour vous si…</strong>Vous utilisez déjà l'IA de temps en temps, mais vous prenez la première réponse sans vraiment savoir comment en tirer plus.</div>
         <div class="niveau-hints"><span class="hint">⚡ Prompting</span><span class="hint">📄 PDF & images</span><span class="hint">📱 Mobile & voix</span><span class="hint">🔄 Itération</span></div>
-        <a href="#contact" class="btn btn-outline" style="font-size:.83rem;padding:.5rem 1.2rem;">Me renseigner →</a>
+        <a href="#contact" class="btn btn-outline" style="font-size:.8rem;padding:.5rem 1.2rem;">Me renseigner →</a>
       </div>
-
-      <div class="niveau-card n3">
+      <div class="niveau-card n3 reveal">
         <div class="niveau-badge">🟡 Niveau 3 · Intermédiaire</div>
         <h3>Passer de consommateur à pilote</h3>
         <p class="tagline">Prendre le contrôle avec précision professionnelle.</p>
         <div class="niveau-pour"><strong>Ce niveau est fait pour vous si…</strong>Vous utilisez l'IA régulièrement mais vos résultats manquent de précision et vous sentez que vous n'exploitez pas son plein potentiel.</div>
         <div class="niveau-hints"><span class="hint">🏗️ Frameworks</span><span class="hint">🔗 Prompt Chaining</span><span class="hint">📊 Data analyse</span><span class="hint">🧩 Raisonnement</span></div>
-        <a href="#contact" class="btn btn-outline" style="font-size:.83rem;padding:.5rem 1.2rem;">Me renseigner →</a>
+        <a href="#contact" class="btn btn-outline" style="font-size:.8rem;padding:.5rem 1.2rem;">Me renseigner →</a>
       </div>
-
-      <div class="niveau-card n4">
+      <div class="niveau-card n4 reveal">
         <div class="niveau-badge">🟠 Niveau 4 · Avancé</div>
         <h3>Créer vos propres outils IA</h3>
         <p class="tagline">Industrialiser votre expertise et automatiser vos workflows.</p>
         <div class="niveau-pour"><strong>Ce niveau est fait pour vous si…</strong>Vous maîtrisez bien l'IA et souhaitez maintenant créer des assistants sur-mesure et connecter l'IA à vos outils métier.</div>
         <div class="niveau-hints"><span class="hint">🤖 Custom GPT</span><span class="hint">⚙️ Automatisation</span><span class="hint">🔐 Sécurité</span><span class="hint">🌐 No-Code</span></div>
-        <a href="#contact" class="btn btn-outline" style="font-size:.83rem;padding:.5rem 1.2rem;">Me renseigner →</a>
+        <a href="#contact" class="btn btn-outline" style="font-size:.8rem;padding:.5rem 1.2rem;">Me renseigner →</a>
       </div>
-
-      <div class="niveau-card n5">
+      <div class="niveau-card n5 reveal">
         <div class="niveau-badge">🟣 Niveau 5 · Expert</div>
         <h3>Architecturer des solutions IA</h3>
         <p class="tagline">Transformer votre organisation grâce à l'IA.</p>
         <div class="niveau-pour"><strong>Ce niveau est fait pour vous si…</strong>Vous voulez déployer des agents autonomes, évaluer les modèles et conseiller votre direction sur la stratégie d'adoption IA.</div>
         <div class="niveau-hints"><span class="hint">🕹️ Agents autonomes</span><span class="hint">📈 ROI & stratégie</span><span class="hint">🐍 Python sandbox</span><span class="hint">🏢 Transformation</span></div>
-        <a href="#contact" class="btn btn-outline" style="font-size:.83rem;padding:.5rem 1.2rem;">Me renseigner →</a>
+        <a href="#contact" class="btn btn-outline" style="font-size:.8rem;padding:.5rem 1.2rem;">Me renseigner →</a>
       </div>
-
     </div>
-
-    <p style="color:var(--muted);font-size:.88rem;margin-top:2rem;text-align:center;">Vous ne savez pas quel niveau vous correspond ? <a href="#contact" style="color:var(--gold2);text-decoration:none;">Contactez-moi</a>, je vous aide à vous positionner.</p>
+    <p class="reveal" style="color:var(--muted);font-size:.85rem;margin-top:2rem;text-align:center;font-weight:300;">Vous ne savez pas quel niveau vous correspond ? <a href="#contact" style="color:var(--gold2);text-decoration:none;font-weight:500;">Contactez-moi</a>, je vous aide à vous positionner.</p>
   </div>
 </section>
 
 <!-- FAQ -->
 <section id="faq">
   <div class="section-inner">
-    <div class="section-tag">FAQ</div>
-    <h2 class="section-title">Vos questions, <em>mes réponses</em></h2>
+    <div class="section-tag reveal">FAQ</div>
+    <h2 class="section-title reveal">Vos questions, <em>mes réponses</em></h2>
     <div class="divider"></div>
-    <div class="faq-list">
+    <div class="faq-list reveal">
       <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">Faut-il des connaissances en informatique pour suivre la formation ?<span class="arrow">+</span></div>
-        <div class="faq-a"><p>Des bases en informatique sont fortement conseillées : manipulation du clavier et de la souris, navigation web. Pas besoin d'être un expert — si vous savez faire une recherche Google, vous êtes prêt à démarrer !</p></div>
+        <div class="faq-q" onclick="toggleFaq(this)">Faut-il des connaissances en informatique ?<span class="arrow">+</span></div>
+        <div class="faq-a"><p>Des bases sont fortement conseillées : manipulation du clavier et de la souris, navigation web. Pas besoin d'être un expert. Si vous savez faire une recherche Google, vous êtes prêt à démarrer !</p></div>
       </div>
       <div class="faq-item">
         <div class="faq-q" onclick="toggleFaq(this)">Proposez-vous des formations en entreprise (intra) ?<span class="arrow">+</span></div>
@@ -357,15 +383,15 @@ footer span{color:var(--gold2);}
       </div>
       <div class="faq-item">
         <div class="faq-q" onclick="toggleFaq(this)">Les formations sont-elles disponibles à distance ?<span class="arrow">+</span></div>
-        <div class="faq-a"><p>Pour l'instant, les modules sont conçus et optimisés pour le présentiel — c'est là que la magie opère vraiment ! Des versions distanciel sont toutefois en cours de développement. Contactez-moi pour être informé dès leur disponibilité.</p></div>
+        <div class="faq-a"><p>Pour l'instant, les modules sont conçus et optimisés pour le présentiel. Des versions distanciel sont en cours de développement. Contactez-moi pour être informé dès leur disponibilité.</p></div>
       </div>
       <div class="faq-item">
         <div class="faq-q" onclick="toggleFaq(this)">Comment se déroule une session type ?<span class="arrow">+</span></div>
-        <div class="faq-a"><p>Tout commence en amont : un questionnaire de positionnement est envoyé pour établir un diagnostic précis et cibler les sujets à aborder. Le jour J, la session démarre par un accueil et une mise en confiance — parfois un icebreaker pour briser la glace. S'ensuivent des apports théoriques, des exercices pratiques, de la gamification et une participation active. La session se conclut par la remise d'un livret apprenant pour continuer à progresser en autonomie.</p></div>
+        <div class="faq-a"><p>Tout commence en amont : un questionnaire de positionnement est envoyé pour établir un diagnostic précis. Le jour J, accueil et mise en confiance, apports théoriques, exercices pratiques, gamification et participation active tout au long de la journée. La session se conclut par la remise d'un livret apprenant pour continuer à progresser en autonomie.</p></div>
       </div>
       <div class="faq-item">
         <div class="faq-q" onclick="toggleFaq(this)">Je ne sais pas quel niveau choisir, que faire ?<span class="arrow">+</span></div>
-        <div class="faq-a"><p>Pas de panique ! Avant chaque formation, je fais parvenir un questionnaire de positionnement qui permet d'évaluer précisément votre niveau actuel et d'identifier vos points forts et axes de progression. Vous pouvez aussi simplement me contacter, on en parle ensemble.</p></div>
+        <div class="faq-a"><p>Pas de panique ! Avant chaque formation, un questionnaire de positionnement permet d'évaluer précisément votre niveau actuel et d'identifier vos points forts et axes de progression. Vous pouvez aussi simplement me contacter, on en parle ensemble.</p></div>
       </div>
     </div>
   </div>
@@ -374,18 +400,18 @@ footer span{color:var(--gold2);}
 <!-- CONTACT -->
 <section id="contact">
   <div class="section-inner">
-    <div class="section-tag">Contact</div>
-    <h2 class="section-title">Parlons de votre <em>projet</em></h2>
+    <div class="section-tag reveal">Contact</div>
+    <h2 class="section-title reveal">Parlons de votre <em>projet</em></h2>
     <div class="divider"></div>
     <div class="contact-grid">
-      <div class="contact-info">
+      <div class="reveal from-left">
         <p>Une question, une demande de devis, ou simplement envie d'en savoir plus ? Je vous réponds sous 48h.</p>
-        <div class="info-item"><div class="info-icon">📍</div>Paris, Île-de-France — France</div>
+        <div class="info-item"><div class="info-icon">📍</div>Paris, Île-de-France · France</div>
         <div class="info-item"><div class="info-icon">📧</div>contact@formatupgrade.com</div>
         <div class="info-item"><div class="info-icon">🔗</div>linkedin.com/in/thomas-sohier</div>
         <div class="info-item"><div class="info-icon">🕐</div>Réponse sous 48h</div>
       </div>
-      <div>
+      <div class="reveal from-right">
         <form id="contact-form">
           <div class="form-group"><label>Votre nom *</label><input type="text" name="nom" placeholder="Jean Dupont" required/></div>
           <div class="form-group"><label>Email *</label><input type="email" name="email" placeholder="jean@exemple.fr" required/></div>
@@ -403,11 +429,11 @@ footer span{color:var(--gold2);}
             <label>Niveau qui vous intéresse</label>
             <select name="niveau">
               <option value="">Sélectionner</option>
-              <option>Niveau 1 — Novice</option>
-              <option>Niveau 2 — Débutant</option>
-              <option>Niveau 3 — Intermédiaire</option>
-              <option>Niveau 4 — Avancé</option>
-              <option>Niveau 5 — Expert</option>
+              <option>Niveau 1 · Novice</option>
+              <option>Niveau 2 · Débutant</option>
+              <option>Niveau 3 · Intermédiaire</option>
+              <option>Niveau 4 · Avancé</option>
+              <option>Niveau 5 · Expert</option>
               <option>Je ne sais pas encore</option>
             </select>
           </div>
@@ -420,12 +446,57 @@ footer span{color:var(--gold2);}
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
-  <p>© 2026 <span>Format'Upgrade</span> — Thomas Sohier · Formateur Professionnel d'Adultes · Tous droits réservés</p>
+  <p>© 2026 <span>Format'Upgrade</span> · Thomas Sohier · Formateur Professionnel d'Adultes · Tous droits réservés</p>
 </footer>
 
 <script>
+// PROGRESS BAR
+window.addEventListener('scroll',()=>{
+  const h=document.documentElement;
+  const pct=(h.scrollTop/(h.scrollHeight-h.clientHeight))*100;
+  document.getElementById('progress-bar').style.width=pct+'%';
+});
+
+// TEXT REVEAL HERO
+window.addEventListener('load',()=>{
+  const words=document.querySelectorAll('.hero-title .word');
+  words.forEach((w,i)=>{
+    setTimeout(()=>{
+      w.style.transition='opacity .4s ease, transform .4s ease';
+      w.style.opacity='1';
+      w.style.transform='translateY(0)';
+    },400+i*100);
+  });
+});
+
+// SCROLL REVEAL
+const observer=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add('visible');
+      if(e.target.classList.contains('apropos-photo-wrap')){
+        e.target.classList.add('visible');
+      }
+    }
+  });
+},{threshold:0.12});
+document.querySelectorAll('.reveal, .apropos-photo-wrap').forEach(el=>observer.observe(el));
+
+// TILT 3D sur cartes niveaux
+document.querySelectorAll('.niveau-card').forEach(card=>{
+  card.addEventListener('mousemove',e=>{
+    const r=card.getBoundingClientRect();
+    const x=e.clientX-r.left-r.width/2;
+    const y=e.clientY-r.top-r.height/2;
+    card.style.transform=`perspective(600px) rotateY(${x/20}deg) rotateX(${-y/20}deg) translateY(-4px)`;
+  });
+  card.addEventListener('mouseleave',()=>{
+    card.style.transform='perspective(600px) rotateY(0) rotateX(0) translateY(0)';
+  });
+});
+
+// FAQ
 function toggleFaq(el){
   const item=el.parentElement;
   const ans=item.querySelector('.faq-a');
@@ -434,23 +505,21 @@ function toggleFaq(el){
   if(!isOpen){item.classList.add('active');ans.classList.add('open');}
 }
 
+// FORMSPREE
 document.getElementById('contact-form').addEventListener('submit',async function(e){
   e.preventDefault();
   const btn=document.getElementById('submit-btn');
   const status=document.getElementById('form-status');
   btn.textContent='Envoi en cours…';
   btn.disabled=true;
-  const data=new FormData(this);
   try{
-    const res=await fetch('https://formspree.io/f/xjgzkqqz',{method:'POST',body:data,headers:{Accept:'application/json'}});
+    const res=await fetch('https://formspree.io/f/xjgzkqqz',{method:'POST',body:new FormData(this),headers:{Accept:'application/json'}});
     if(res.ok){
       status.className='form-status success';
       status.textContent='✅ Merci ! Votre message a bien été envoyé. Thomas vous répondra sous 48h.';
       status.style.display='block';
       this.reset();
-    } else {
-      throw new Error();
-    }
+    } else throw new Error();
   } catch{
     status.className='form-status error';
     status.textContent='❌ Une erreur est survenue. Réessayez ou écrivez directement à contact@formatupgrade.com';
